@@ -8,7 +8,7 @@
 
 --------------------------------
 
-## Soal 1
+## (REVISI) Soal 1
 
 User melakukan berbagai aktivitas dengan menggunakan protokol FTP. Salah satunya adalah mengunggah suatu file.
 
@@ -17,25 +17,21 @@ User melakukan berbagai aktivitas dengan menggunakan protokol FTP. Salah satunya
     Berapakah sequence number (raw) pada packet yang menunjukkan aktivitas tersebut? 
 </li>
 
-- 258040667
 
 <li>
     Berapakah acknowledge number (raw) pada packet yang menunjukkan aktivitas tersebut?
 </li>
 
-- 1044861039
 
 <li>
     Berapakah sequence number (raw) pada packet yang menunjukkan response dari aktivitas tersebut?
 </li>
 
-- 1044861039
 
 <li>
     Berapakah acknowledge number (raw) pada packet yang menunjukkan response dari aktivitas tersebut?
 </li>
 
-- 258040696
 
 </ol>
 
@@ -43,7 +39,19 @@ User melakukan berbagai aktivitas dengan menggunakan protokol FTP. Salah satunya
 
 ## Jawaban Soal 1 :
 
-- 
+- Untuk menampilkan aktivitas paket, maka digunakan filter
+```sh
+tcp contains "STOR"
+```
+yang mana **"STOR"** merupakan command FTP untuk menyimpan file pada host remote.<br/>
+Maka didapati Sequence Number (raw) beserta Acknowledge Number (raw) sebagai berikut
+![Soal1-1](<images/1.0.png>)
+<br/> SN(r) : 258040667
+<br/> AN(r) : 1044861039
+- Selanjutnya untuk paket response terhadap request sebelumnya dapat ditemui di bawah, dengan Sequence Number (raw) diikuti dengan Acknowledge Number (raw) berikut: <br />
+![Soal1-2](<images/1.1.png>)
+<br/> SN(r) : 1044861039
+<br/> AN(r) : 258040696
 
 --------------------------------
 
@@ -54,6 +62,9 @@ Sebutkan web server yang digunakan pada portal praktikum Jaringan Komputer!
 ## Jawaban Soal 2 :
 
 - Filter packet menggunakan query `http` kemudian follow HTTP Stream lalu search `server`
+```sh
+http.server
+```
 
 ![Soal2-1](<images/2-a.jpg>)
 
@@ -61,7 +72,7 @@ Sebutkan web server yang digunakan pada portal praktikum Jaringan Komputer!
 
 
 --------------------------------
-## Soal 3 :
+## (REVISI) Soal 3 :
 
 Dapin sedang belajar analisis jaringan. Bantulah Dapin untuk mengerjakan soal berikut:
 
@@ -70,21 +81,21 @@ Dapin sedang belajar analisis jaringan. Bantulah Dapin untuk mengerjakan soal be
     Berapa banyak paket yang tercapture dengan IP source maupun destination address adalah 239.255.255.250 dengan port 3702?
 </li>
 
-- 21
-
 <li>
     Protokol layer transport apa yang digunakan?
 </li>
-
-- UDP
 
 </ol>
 
 
 ## Jawaban Soal 3 :
 
-- 
-- 
+- Untuk melakukan filter terhadap IP dengan source maupun destination 239.255.255.250 digunakan ``ip.addr`` serta ``udp.dstport`` untuk melakukan filter port. Jika digunakan sekaligus akan sebagai berikut:
+```sh
+ip.addr == 239.255.255.250 && udp.dstport 3702
+```
+- Untuk melihat jumlah paket yang ditangkap, dapat diamati pada pojok kanan bawah, dan protokol yang digunakan pada kolom protokol yang ditampilkan dalam gambar
+![Soal3-1](<images/3.0.png>)
 
 
 --------------------------------
@@ -100,7 +111,7 @@ Berapa nilai checksum yang didapat dari header pada paket nomor 130?
 
 
 --------------------------------
-## Soal 5 :
+## (REVISI) Soal 5 :
 
 Elshe menemukan suatu file packet capture yang menarik. Bantulah Elshe untuk menganalisis file packet capture tersebut.
 
@@ -118,11 +129,19 @@ Dari semua alamat IP yang tercapture, IP berapakah yang merupakan public IP?
 
 ## Jawaban Soal 5 :
 
-- 
-- 
+- Bersamaan dengan file pcap soal, juga diberikan file zip yang dikunci; maka dilakukan pencarian terhadap password file zip tersebut. <br/>
+Pencarian dilakukan dengan menggunakan filter ``contains`` dan keyword `"zip"` sebagai berikut:
+```sh
+frame contains "zip"
+``` 
+- Ditemukan 1 paket SMTP dengan pesan terenkripsi
+![Soal5-1](<images/5.1.png>) hasil dari filtering
+setelah dilakukan dekripsi, password digunakan untuk membuka note dalam file hasil ekstraksi sebelumnya. ![Soal5-2](<images/5.2.png>)
+- Setelah mengikuti perintah dari file, kemudian didapati pertanyaan berupa jumlah paket hasil capture, server yang digunakan, dan IP public. Solusinya dapat dilakukan dengan melakukan filtering dengan keyword **SMTP**, dan kemudian didapati jumlah paket hasil capture di ujung kanan bawah, server pada badan paket, dan alamat IP yang tidak berawalan 10. (IP ITS)
+![Soal5-2](<images/5.4.png>)
 
 
---------------------------------
+
 ## (REVISI) Soal 6 :
 
 Seorang anak bernama Udin Berteman dengan SlameT yang merupakan seorang penggemar film detektif. sebagai teman yang baik, Ia selalu mengajak slamet untuk bermain valoranT bersama. suatu malam, terjadi sebuah hal yang tak terdUga. ketika udin mereka membuka game tersebut, laptop udin menunjukkan sebuah field text dan Sebuah kode Invalid bertuliskan <b>"server SOURCE ADDRESS 7812 is invalid".</b> ketika ditelusuri di google, hasil pencarian hanya menampilkan a1 e5 u21. jiwa detektif slamet pun bergejolak. bantulah udin dan slamet untuk menemukan solusi kode error tersebut.
@@ -163,16 +182,21 @@ JDRNJA
 Berapa jumlah packet yang menuju IP 184.87.193.88?
 
 ## Jawaban Soal 7 :
-- 
-- 
-- 
+- Jumlah paket menuju IP 184.87.193.88 dapat ditemukan cukup dengan filter
+```sh
+IP.dst == 184.87.193.88
+```
+- Hasil yang didapat sebagai berikut ![Soal7-1](<images/7.0.png>)
 --------------------------------
 ## Soal 8 :
 
 Berikan kueri filter sehingga wireshark hanya mengambil semua protokol paket yang menuju port 80! (Jika terdapat lebih dari 1 port, maka urutkan sesuai dengan abjad)
 ## Jawaban Soal 8 :
 
--
+- Filtering paket menuju port 80 dengan query ascending adalah sebagai berikut 
+```sh
+tcp.dstport == 80 && udp.dstport == 80
+```
 
 --------------------------------
 
@@ -189,4 +213,8 @@ Berikan kueri filter sehingga wireshark hanya mengambil paket yang berasal dari 
 Sebutkan kredensial yang benar ketika user mencoba login menggunakan Telnet
 
 ## Jawaban Soal 10 :
--
+- Melakukan pencarian kredensial user telnet dapat dilakukan dengan filter 
+```sh
+telnet contains "login"
+```
+dan kemudian didapati hasil sebagai berikut ![Soal10-1](<images/10.0.png>)
