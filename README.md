@@ -123,13 +123,37 @@ Dari semua alamat IP yang tercapture, IP berapakah yang merupakan public IP?
 
 
 --------------------------------
-## Soal 6 :
+## (REVISI) Soal 6 :
 
 Seorang anak bernama Udin Berteman dengan SlameT yang merupakan seorang penggemar film detektif. sebagai teman yang baik, Ia selalu mengajak slamet untuk bermain valoranT bersama. suatu malam, terjadi sebuah hal yang tak terdUga. ketika udin mereka membuka game tersebut, laptop udin menunjukkan sebuah field text dan Sebuah kode Invalid bertuliskan <b>"server SOURCE ADDRESS 7812 is invalid".</b> ketika ditelusuri di google, hasil pencarian hanya menampilkan a1 e5 u21. jiwa detektif slamet pun bergejolak. bantulah udin dan slamet untuk menemukan solusi kode error tersebut.
 
 ## Jawaban Soal 6 :
+- Untuk menyelesaikan soal pada nomor ini kita perhatikan pada pola decrypt yang diberikan yaitu ``a1 e5 u21``. Setelah itu kita lihat pada bagian yang ditandai tebal pada soal yaitu ``SOURCE ADDRESS 7812``.
 
--
+- Selanjutnya kita akan mengecek PACKET bernomor 7812. Dan setelah itu kita dapat melihat ``SOURCE ADDRESS`` bersamaan dengan itu juga kita dapat melihat ``ip 
+  source`` yang ada disitu. Setelah itu kita dapat membentuk suatu barisan angka yang dapat dipecah menjadi beberapa angka karena huruf hanya ada 26
+
+Berikut adalah ``IP Source`` yang ditemukan 
+```
+104.18.14.101
+```
+![Soal6-1](<images/6-b.jpg>)
+
+Berikutnya kita dapat menyatukan IP Source tersebut menjadi suatu deretan angka 
+```
+1041814101
+```
+
+Setlah itu kita dapat memecah menjadi angka yang ``<= 26``
+```
+10 4 18 14 10 1
+```
+
+Pada akhirnya kita dapat menghasilkan suatu kata dari pola yang telah ditemukan yaitu 
+```
+JDRNJA
+```
+![Soal6-1](<images/6-a.jpg>)
 
 
 --------------------------------
