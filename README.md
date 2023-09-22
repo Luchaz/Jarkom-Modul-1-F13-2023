@@ -197,6 +197,7 @@ Berikan kueri filter sehingga wireshark hanya mengambil semua protokol paket yan
 ```sh
 tcp.dstport == 80 && udp.dstport == 80
 ```
+- Didapati hasil berikut ![Soal8-1](<images/8.0.png>)
 
 --------------------------------
 
