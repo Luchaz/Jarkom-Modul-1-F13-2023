@@ -204,7 +204,10 @@ tcp.dstport == 80 && udp.dstport == 80
 Berikan kueri filter sehingga wireshark hanya mengambil paket yang berasal dari alamat 10.51.40.1 tetapi tidak menuju ke alamat 10.39.55.34!
 
 ## Jawaban Soal 9 :
-- `ip.src == 10.51.40.1 && ip.dst != 10.39.55.34`
+-![Soal9-1](<images/9.0.png>)
+```sh
+ip.src == 10.51.40.1 && ip.dst != 10.39.55.34
+```
 
 --------------------------------
 
@@ -215,6 +218,6 @@ Sebutkan kredensial yang benar ketika user mencoba login menggunakan Telnet
 ## Jawaban Soal 10 :
 - Melakukan pencarian kredensial user telnet dapat dilakukan dengan filter 
 ```sh
-telnet contains "login"
+telnet contains "Login"
 ```
 dan kemudian didapati hasil sebagai berikut ![Soal10-1](<images/10.0.png>)
